@@ -1,0 +1,18 @@
+/* ⚠️ fonts.css 가 가장 먼저입니다.
+   안에 원격 @import url() (Google Fonts · Pretendard) 이 있는데,
+   CSS 규격상 @import 는 다른 모든 규칙보다 앞에 와야 합니다.
+   tailwindcss 뒤로 가면 "@import rules must precede all rules" 로 빌드가 깨집니다. */
+@import "../styles/jayden-core/fonts.css";
+
+@import "tailwindcss";
+
+/* Jayden Core — 디자인 토큰. ⚠️ src/styles/jayden-core/ 안의 값을 고치지 마세요.
+   원본: jayden_project_00/packages/jayden-core/tokens.css */
+@import "../styles/jayden-core/tokens.css";
+
+html,
+body {
+  background: var(--jd-bg);
+  color: var(--jd-text);
+  font-family: var(--jd-font-body);
+}

@@ -1,0 +1,148 @@
+/* ⚠️ 복사본입니다. 여기서 고치지 마세요.
+   원본: jayden_project_00/packages/jayden-core/tokens.css
+   값을 바꿔야 하면 원본을 고치고 다시 복사합니다.
+   복사 시점: 2026-09-04 */
+
+/* ==========================================================================
+   JAYDEN CORE — 디자인 토큰
+   --------------------------------------------------------------------------
+   색·서체 값의 단일 원본(single source of truth)입니다.
+   docs/07-brand-system.md 의 표는 "설명"이고, 실제 값은 이 파일입니다.
+   값이 갈리면 이 파일이 이깁니다. 앱에서 hex를 직접 쓰지 마세요.
+
+   구조 (3층)
+     1) 원시 팔레트  — 모드와 무관한 고정 hex. 여기서만 hex를 씁니다
+     2) 시맨틱 매핑  — 모드(라이트/다크)별로 1층을 역할에 배정
+     3) Tailwind 노출 — 2층을 유틸리티로 내보냄
+
+   테마 해석 순서
+     :root                                   → 라이트 (함선 내부 / Deck Interior)
+     @media (prefers-color-scheme: dark)     → OS 다크 (야간 운항 / Night Ops)
+     [data-theme="dark"|"light"]             → 명시적 선택이 OS를 이김
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1) 원시 팔레트 — Steel 램프 + 액센트
+   -------------------------------------------------------------------------- */
+:root {
+  /* Steel — 뉴트럴 */
+  --jd-steel-0:   #FFFFFF;
+  --jd-steel-50:  #F5F7FA;
+  --jd-steel-200: #D2D9E3;
+  --jd-steel-500: #58687A;
+  --jd-steel-600: #7D8B9C;
+  --jd-steel-700: #26313D;
+  --jd-steel-800: #1C242E;
+  --jd-steel-850: #141A21;
+  --jd-steel-900: #0C1218;
+  --jd-steel-950: #06090D;
+
+  /* Ion Cyan — 작동중·활성·링크 */
+  --jd-cyan-500: #00C8F5;
+  --jd-cyan-700: #0E7490;
+
+  /* Amber — 결재 대기·퀘스트·경고 */
+  --jd-amber-500: #FFB020;
+  --jd-amber-700: #AA6600;
+
+  /* Crimson — 반려·리스크·실패 */
+  --jd-crimson-500: #FF4D5E;
+  --jd-crimson-700: #B3001B;
+
+  /* Mint — 승인·완료 */
+  --jd-mint-500: #2EE6A8;
+  --jd-mint-700: #0E7A5A;
+}
+
+/* --------------------------------------------------------------------------
+   2) 시맨틱 매핑 — 라이트 (기본): 함선 내부 / Deck Interior
+   -------------------------------------------------------------------------- */
+:root {
+  --jd-bg:             var(--jd-steel-0);
+  --jd-surface:        var(--jd-steel-50);
+  --jd-surface-raised: var(--jd-steel-0);
+  --jd-border:         var(--jd-steel-200);
+  --jd-text:           var(--jd-steel-900);
+  --jd-text-muted:     var(--jd-steel-500);
+
+  /* 텍스트·테두리용 (명암비 4.5:1 통과) */
+  --jd-accent:    var(--jd-cyan-700);
+  --jd-attention: var(--jd-amber-700);
+  --jd-danger:    var(--jd-crimson-700);
+  --jd-success:   var(--jd-mint-700);
+
+  /* 발광·아이콘·LED 전용 (비텍스트에만) — 브랜드 §4 제약 */
+  --jd-accent-glow:    var(--jd-cyan-500);
+  --jd-attention-glow: var(--jd-amber-500);
+  --jd-danger-glow:    var(--jd-crimson-500);
+  --jd-success-glow:   var(--jd-mint-500);
+
+  /* 모티프 상수 — 브랜드 §7 */
+  --jd-cut: 8px;              /* 모서리 컷 절단 크기 */
+  --jd-hazard-angle: 45deg;   /* 경고 사선 각도 */
+  --jd-label-tracking: 0.12em;
+  --jd-wordmark-tracking: 0.18em;
+}
+
+/* --------------------------------------------------------------------------
+   2b) 다크 — 야간 운항 / Night Ops
+        OS 설정. 단, 사용자가 라이트를 명시했으면 적용하지 않습니다.
+   -------------------------------------------------------------------------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --jd-bg:             var(--jd-steel-950);
+    --jd-surface:        var(--jd-steel-850);
+    --jd-surface-raised: var(--jd-steel-800);
+    --jd-border:         var(--jd-steel-700);
+    --jd-text:           var(--jd-steel-50);
+    --jd-text-muted:     var(--jd-steel-600);
+
+    /* 다크에서는 발광값이 곧 텍스트값 */
+    --jd-accent:    var(--jd-cyan-500);
+    --jd-attention: var(--jd-amber-500);
+    --jd-danger:    var(--jd-crimson-500);
+    --jd-success:   var(--jd-mint-500);
+  }
+}
+
+/* 2c) 명시적 선택이 OS를 이깁니다 */
+:root[data-theme="dark"] {
+  --jd-bg:             var(--jd-steel-950);
+  --jd-surface:        var(--jd-steel-850);
+  --jd-surface-raised: var(--jd-steel-800);
+  --jd-border:         var(--jd-steel-700);
+  --jd-text:           var(--jd-steel-50);
+  --jd-text-muted:     var(--jd-steel-600);
+
+  --jd-accent:    var(--jd-cyan-500);
+  --jd-attention: var(--jd-amber-500);
+  --jd-danger:    var(--jd-crimson-500);
+  --jd-success:   var(--jd-mint-500);
+}
+
+/* --------------------------------------------------------------------------
+   3) Tailwind v4 노출
+      값이 런타임에 바뀌므로 반드시 `inline` 입니다.
+      (`@theme`만 쓰면 값이 빌드타임에 고정되어 테마 전환이 죽습니다)
+
+      Tailwind를 안 쓰는 환경(순수 HTML 등)에서는 이 블록이 무시되고
+      위 1~2층의 `--jd-*` 변수만으로도 그대로 동작합니다.
+   -------------------------------------------------------------------------- */
+@theme inline {
+  --color-bg:             var(--jd-bg);
+  --color-surface:        var(--jd-surface);
+  --color-surface-raised: var(--jd-surface-raised);
+  --color-border:         var(--jd-border);
+  --color-text:           var(--jd-text);
+  --color-text-muted:     var(--jd-text-muted);
+
+  --color-accent:    var(--jd-accent);
+  --color-attention: var(--jd-attention);
+  --color-danger:    var(--jd-danger);
+  --color-success:   var(--jd-success);
+
+  --color-accent-glow:    var(--jd-accent-glow);
+  --color-attention-glow: var(--jd-attention-glow);
+  --color-danger-glow:    var(--jd-danger-glow);
+  --color-success-glow:   var(--jd-success-glow);
+}
