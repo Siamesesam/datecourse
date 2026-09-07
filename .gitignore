@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+# ⚠️ 허브(jayden_project_00)의 .gitignore 는 이 repo 에 상속되지 않습니다.
+.idea/
+.vscode/
+!.vscode/extensions.json

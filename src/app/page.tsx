@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <main className="mx-auto w-full max-w-3xl px-6 py-12">
       <header className="flex items-baseline justify-between gap-4">
-        <h1 className="jd-wordmark text-2xl text-text">JAYDEN MAP</h1>
+        <h1 className="jd-wordmark text-text text-2xl">JAYDEN MAP</h1>
         <div className="flex gap-1">
           {(["system", "light", "dark"] as const).map((m) => (
             <button
@@ -25,11 +25,12 @@ export default function Home() {
               onClick={() => setMode(m)}
               aria-pressed={mode === m}
               className={`jd-label border px-3 py-1.5 ${
-                mode === m
-                  ? "border-accent text-accent"
-                  : "border-border text-text-muted"
+                mode === m ? "border-accent text-accent" : "border-border text-text-muted"
               }`}
-              style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+              style={{
+                clipPath:
+                  "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+              }}
             >
               {m}
             </button>
@@ -37,7 +38,7 @@ export default function Home() {
         </div>
       </header>
 
-      <p className="mt-2 text-sm text-text-muted">
+      <p className="text-text-muted mt-2 text-sm">
         토큰 검증 페이지입니다. 세 버튼으로 라이트/다크를 강제해 두 스킨을 확인합니다.
       </p>
 
@@ -51,8 +52,11 @@ export default function Home() {
         ].map((c) => (
           <div
             key={c.name}
-            className="border border-border bg-surface p-4"
-            style={{ clipPath: "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)" }}
+            className="border-border bg-surface border p-4"
+            style={{
+              clipPath:
+                "polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px)",
+            }}
           >
             <div className="flex items-center gap-2">
               <span className={`inline-block h-1.5 w-1.5 rounded-full ${c.glow}`} />
@@ -64,7 +68,7 @@ export default function Home() {
       </section>
 
       {/* 등폭 숫자 — 이 앱은 숫자가 화면의 절반입니다 */}
-      <section className="mt-6 border border-border bg-surface p-5">
+      <section className="border-border bg-surface mt-6 border p-5">
         <span className="jd-label text-text-muted">TIMELINE SAMPLE</span>
         <ul className="mt-3 space-y-1.5 text-sm">
           {[
@@ -74,7 +78,7 @@ export default function Home() {
           ].map(([time, name, stay, cost]) => (
             <li key={time} className="flex items-baseline gap-3">
               <span className="jd-num text-accent">{time}</span>
-              <span className="flex-1 text-text">{name}</span>
+              <span className="text-text flex-1">{name}</span>
               <span className="jd-num text-text-muted">{stay}</span>
               <span className="jd-num text-text-muted">{cost}</span>
             </li>
@@ -82,7 +86,7 @@ export default function Home() {
         </ul>
       </section>
 
-      <p className="mt-6 text-xs text-text-muted">
+      <p className="text-text-muted mt-6 text-xs">
         이 페이지에는 hex 값이 없습니다. 색이 보인다는 것 자체가 토큰이 동작한다는 증명입니다.
       </p>
     </main>

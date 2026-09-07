@@ -1,0 +1,37 @@
+# CI 1단계 — lint + typecheck 만.
+#   build 는 넣지 않습니다. Vercel 이 매 push 마다 이미 빌드하므로 중복입니다.
+#   test 는 W2 에 추가합니다 (타임라인 계산 단위 테스트가 생기는 시점).
+# 전체 파이프라인은 프로젝트 2번 완료 후 별도 PR — docs/03-conventions.md#cicd
+name: CI
+
+on:
+  pull_request:
+    branches: [dev, master]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 로컬과 같은 버전으로 고정합니다. 버전이 갈리면 CI 가 거짓말을 합니다.
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
