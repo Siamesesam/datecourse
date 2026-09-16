@@ -16,3 +16,12 @@ body {
   color: var(--jd-text);
   font-family: var(--jd-font-body);
 }
+
+/* 지도 컨테이너.
+   ⚠️ 네이버 지도는 컨테이너에 **실제 높이**가 있어야 그려집니다.
+   height 를 안 주면 0px 이 되어 "지도가 안 나온다"로 보입니다 — 증상이 인증 실패와 똑같아
+   헷갈리기 쉬운 지점입니다. flex 자식이므로 남는 높이를 전부 차지하게 둡니다. */
+.jd-map {
+  flex: 1 1 auto;
+  min-height: 24rem;
+}

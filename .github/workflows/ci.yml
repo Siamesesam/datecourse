@@ -1,6 +1,6 @@
-# CI 1단계 — lint + typecheck 만.
+# CI 1단계 — lint + typecheck + test.
 #   build 는 넣지 않습니다. Vercel 이 매 push 마다 이미 빌드하므로 중복입니다.
-#   test 는 W2 에 추가합니다 (타임라인 계산 단위 테스트가 생기는 시점).
+#   test 는 2026-09-16 추가 — 열린 리다이렉트 방어 함수가 첫 대상입니다.
 # 전체 파이프라인은 프로젝트 2번 완료 후 별도 PR — docs/03-conventions.md#cicd
 name: CI
 
@@ -35,3 +35,6 @@ jobs:
 
       - name: Typecheck
         run: pnpm typecheck
+
+      - name: Test
+        run: pnpm test
